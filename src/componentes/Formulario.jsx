@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import Error from './Error';
 
-const Formulario = ({pacientes, setPacientes, pacienteModificado}) => { 
+const Formulario = ({pacientes, setPacientes, pacienteModificado, setPacienteModificado}) => { 
 
     const [mascota, setMascota] = useState ('')
     const [propietario, setPropietario] = useState ('')
@@ -22,6 +22,7 @@ const Formulario = ({pacientes, setPacientes, pacienteModificado}) => {
         }
     },[pacienteModificado])
 
+    
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -48,6 +49,8 @@ const Formulario = ({pacientes, setPacientes, pacienteModificado}) => {
             sintomas,
         } 
 
+
+
         // Comprobar si es nuevo registro o edicion de uno existente.
         // Si existe id es porque ya fue creado el objeto Paciente, y lo estas modificando
         if (pacienteModificado.id) {
@@ -59,7 +62,9 @@ const Formulario = ({pacientes, setPacientes, pacienteModificado}) => {
                 pacienteActualizado.id === pacienteModificado.id ? objPaciente : pacienteActualizado)
                 
             setPacientes(pacienteActualizado)
-        
+            setPacienteModificado({})
+                
+
         } else { 
             // Nuevo registro
             objPaciente.id = generarID(); //1° genero el ID, luego lo agrego a pacientes
